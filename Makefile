@@ -12,7 +12,7 @@ DEPS := $(OBJS:.o=.d)
 
 INC_DIRS = -Iinclude
 
-CPPFLAGS = $(INC_DIRS) -MMD -MP --std=c++17 -g
+CPPFLAGS = $(INC_DIRS) -MMD -MP --std=c++17 -O2
 LDFLAGS  = -lpthread   \
            -lX11       \
            -lGL        \
