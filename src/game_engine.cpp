@@ -61,6 +61,13 @@ bool GameEngine::OnUserUpdate(float fElapsedTime) {
         // DrawNodeGrid();
     }
 
+    if (GetKey(olc::Key::R).bReleased) {
+        Clear(getPixelColor(BACKGROUND));
+        m_NodeGrid.randomizeObstacles();
+        m_NodeGrid.updateNodeAdjacency();
+        DrawNodeGrid();
+    }
+
     if (m_nodePtr != nullptr && !m_NodeGrid.getVisitedNodes().empty()) {
         // printf("Drawing visited node [%d]\n", m_nodePtr->nid());
         if (isLargerThanFPS) {

@@ -11,7 +11,7 @@ NodeGrid::NodeGrid(int rows, int columns)
     // Grid Map Constructor
     initGridNodes(getTotalNodes());
 
-    printf("Creating grid map with %d nodes.\n", m_NodeGrid.size());
+    printf("Creating grid map with %zu nodes.\n", m_NodeGrid.size());
     printf("No. of rows: %d\n", getRows());
     printf("No. of cols: %d\n", getColumns());
 
@@ -68,6 +68,16 @@ void NodeGrid::initGridNodes(int totalNodes) {
     setEndNode(totalNodes - 1);
 }
 
+void NodeGrid::randomizeObstacles() {
+    std::bernoulli_distribution distribution(0.5);
+    
+    for (auto node_ptr : m_NodeGrid) {
+        if (distribution(generator)) {
+            node_ptr->toggleObstacle();
+        }
+    }
+}
+
 void NodeGrid::setStartNode(int nodeId) {
     if (startNode != nullptr)
         startNode->clearFlags();
@@ -75,7 +85,6 @@ void NodeGrid::setStartNode(int nodeId) {
     m_NodeGrid[nodeId]->setStartNode(true);
     m_NodeGrid[nodeId]->setDistFromStart(0.0);
     startNode = m_NodeGrid[nodeId];
-    
 }
 
 void NodeGrid::setEndNode(int nodeId) {

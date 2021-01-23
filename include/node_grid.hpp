@@ -3,6 +3,7 @@
 
 #include "node.hpp"
 #include <deque>
+#include <random>
 
 class NodeGrid {
 public:
@@ -24,8 +25,12 @@ public:
     void setStartNode(int nodeId);
     void setEndNode(int nodeId);
 
+    void randomizeObstacles();
     void updateNodeAdjacency();
     void solvePath();
+
+protected:
+    std::default_random_engine generator;
 
 private:
     int m_rows, m_columns;
